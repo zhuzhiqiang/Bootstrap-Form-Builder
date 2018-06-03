@@ -2,13 +2,13 @@ define([
        "jquery" , "underscore" , "backbone"
        , "collections/snippets" , "collections/my-form-snippets"
        , "views/tab" , "views/my-form"
-       , "text!data/input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
+       , "text!data/input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json", "text!data/banner.json"
        , "text!templates/app/render.html",  "text!templates/app/about.html", 
 ], function(
   $, _, Backbone
   , SnippetsCollection, MyFormSnippetsCollection
   , TabView, MyFormView
-  , inputJSON, radioJSON, selectJSON, buttonsJSON
+  , inputJSON, radioJSON, selectJSON, buttonsJSON, bannerJSON
   , renderTab, aboutTab
 ){
   return {
@@ -31,14 +31,18 @@ define([
         title: "Buttons"
         , collection: new SnippetsCollection(JSON.parse(buttonsJSON))
       });
-      new TabView({
-        title: "Rendered"
-        , content: renderTab
-      });
-      new TabView({
-        title: "About"
-        , content: aboutTab
-      });
+      // new TabView({
+      //   title: "Rendered"
+      //   , content: renderTab
+      // });
+      // new TabView({
+      //   title: "About"
+      //   , content: aboutTab
+      // });
+        new TabView({
+            title: "平台"
+            , collection: new SnippetsCollection(JSON.parse(bannerJSON))
+        });
 
       //Make the first tab active!
       $("#components .tab-pane").first().addClass("active");
@@ -47,15 +51,15 @@ define([
       new MyFormView({
         title: "Original"
         , collection: new MyFormSnippetsCollection([
-          { "title" : "Form Name"
-            , "fields": {
-              "name" : {
-                "label"   : "Form Name"
-                , "type"  : "input"
-                , "value" : "Form Name"
-              }
-            }
-          }
+          // { "title" : "Form Name"
+          //   , "fields": {
+          //     "name" : {
+          //       "label"   : "Form Name"
+          //       , "type"  : "input"
+          //       , "value" : "Form Name"
+          //     }
+          //   }
+          // }
         ])
       });
     }

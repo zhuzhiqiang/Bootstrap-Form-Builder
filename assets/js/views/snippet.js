@@ -1,34 +1,37 @@
 define([
-  "jquery", "underscore", "backbone"
+  "jquery", "underscore", "backbone","banner"
   , "text!templates/popover/popover-main.html"
   , "text!templates/popover/popover-input.html"
   , "text!templates/popover/popover-select.html"
   , "text!templates/popover/popover-textarea.html"
   , "text!templates/popover/popover-textarea-split.html"
   , "text!templates/popover/popover-checkbox.html"
+  , "text!templates/popover/popover-banner.html"
   , "templates/snippet/snippet-templates"
   , "bootstrap"
 ], function(
-  $, _, Backbone
+  $, _, Backbone,banner
   , _PopoverMain
   , _PopoverInput
   , _PopoverSelect
   , _PopoverTextArea
   , _PopoverTextAreaSplit
   , _PopoverCheckbox
+  , _PopoverBanner
   , _snippetTemplates
 ){
   return Backbone.View.extend({
     tagName: "div"
     , className: "component" 
     , initialize: function(){
-      this.template = _.template(_snippetTemplates[this.model.idFriendlyTitle()])
+      this.template = _.template(_snippetTemplates[this.model.idFriendlyTitle()]);
       this.popoverTemplates = {
         "input" : _.template(_PopoverInput)
         , "select" : _.template(_PopoverSelect)
         , "textarea" : _.template(_PopoverTextArea)
         , "textarea-split" : _.template(_PopoverTextAreaSplit)
         , "checkbox" : _.template(_PopoverCheckbox)
+        , "banner" : _.template(_PopoverBanner)
       }
     }
     , render: function(withAttributes){
@@ -48,9 +51,7 @@ define([
           , "data-html"      : true
         });
       } else {
-        return this.$el.html(
-          that.template(that.model.getValues())
-        )
+        return this.$el.html(that.template(that.model.getValues()));
       }
     }
   });
